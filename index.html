@@ -1,0 +1,1733 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>One Zone Health & Cosmetic Clinic</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.png">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- CSS here -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/animate.min.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="css/dripicons.css">
+  <link rel="stylesheet" href="css/slick.css">
+  <link rel="stylesheet" href="css/meanmenu.css">
+  <link rel="stylesheet" href="css/default.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Gallery Styles -->
+  <style>
+    .gallery-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-scroll {
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+
+    .gallery-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 20px;
+      padding: 10px 0;
+    }
+
+    .before-after-box {
+      flex: 0 0 auto;
+      width: 300px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transition: transform .3s ease;
+    }
+
+    .before-after-box:hover {
+      transform: scale(1.04);
+    }
+
+    .gallery-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgb(191, 105, 0);
+      color: #fff;
+      border: none;
+      font-size: 28px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color .3s;
+      z-index: 10;
+      border: 2px solid #fff;
+    }
+
+    .gallery-btn:hover {
+      background-color: #b18b5e;
+    }
+
+    .gallery-prev {
+      left: 0px;
+    }
+
+    .gallery-next {
+      right: 0px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .before-after-box {
+        width: 220px;
+      }
+
+      .gallery-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 22px;
+      }
+    }
+  </style>
+
+  <!-- Gallery Scroll Buttons JS -->
+
+  <!-- Styles (scoped; move to your CSS file if you prefer) -->
+  <style>
+    /* Buttons (left side) */
+    .face-map-btn {
+      display: inline-block;
+      margin: 8px 8px 0 0;
+      padding: 10px 14px;
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+      transition: all .16s ease;
+      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
+    }
+
+    .face-map-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .face-map-btn.active {
+      background: #b18b5e;
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 12px 28px rgba(11, 18, 28, 0.12);
+    }
+
+    /* Dots (absolute, percent-based) */
+    .face-map-image-wrap {
+      position: relative;
+    }
+
+    .face-dot {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.96);
+      border: 2px solid rgba(155, 119, 105, 0.95);
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 4;
+      transition: transform .18s ease, box-shadow .18s ease;
+      box-shadow: 0 8px 20px rgba(2, 6, 23, 0.08);
+    }
+
+    .face-dot::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(155, 119, 105, 0.95);
+      display: block;
+    }
+
+    .face-dot.active {
+      transform: translate(-50%, -50%) scale(1.25);
+      box-shadow: 0 16px 36px rgba(155, 119, 105, 0.18);
+    }
+
+    /* Tooltip card */
+    .face-tooltip {
+      position: absolute;
+      min-width: 160px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: 0 14px 40px rgba(2, 6, 23, 0.18);
+      z-index: 6;
+      display: none;
+    }
+
+    .face-tooltip .tt-name {
+      font-weight: 600;
+      color: #0b2540;
+      margin-bottom: 6px;
+    }
+
+    .face-tooltip .tt-price {
+      color: #b18b5e;
+      font-weight: 700;
+    }
+
+    /* caret */
+    .face-tooltip::before {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      transform: rotate(45deg);
+      left: 14px;
+      top: -5px;
+      box-shadow: -2px -2px 6px rgba(2, 6, 23, 0.04);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .face-map-btn {
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .face-map-btn {
+        display: inline-block;
+        margin: 6px 6px 6px 0;
+      }
+
+      .face-tooltip {
+        min-width: 140px;
+      }
+    }
+  </style>
+
+  <!-- Script (interactive behavior) -->
+
+  <!-- ================= STYLES ================= -->
+  <style>
+    /* Positioning: top 150px, right 24px */
+    .wechat-pill {
+      position: fixed;
+      top: 200px;
+      right: 24px;
+      z-index: 1600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      height: 52px;
+      border-radius: 12px;
+      border: none;
+      background: #2dc100;
+      color: #fff;
+      font-weight: 700;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      cursor: pointer;
+      box-shadow: 0 14px 36px rgba(2, 6, 23, 0.18);
+      transform: translateY(-6px) scale(0.98);
+      transition: transform .22s ease, box-shadow .22s ease, opacity .22s ease;
+      -webkit-tap-highlight-color: transparent;
+      overflow: visible;
+    }
+
+    /* icon on left */
+    .wf-pill-icon {
+      width: 50px;
+      height: 50px;
+      display: block;
+      object-fit: contain;
+      filter: none;
+      /* keep original icon colors */
+    }
+
+    /* text */
+    .wf-pill-text {
+      font-size: 15px;
+      line-height: 1;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    /* hover lift */
+    .wechat-pill:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 48px rgba(2, 6, 23, 0.22);
+    }
+
+    /* entrance animation: slide in from right */
+    @keyframes wfSlideIn {
+      0% {
+        transform: translateX(18px) translateY(-6px) scale(.98);
+        opacity: 0;
+      }
+
+      60% {
+        transform: translateX(-6px) translateY(-8px) scale(1.02);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(0) translateY(-6px) scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* idle floating (subtle) */
+    @keyframes wfFloat {
+      0% {
+        transform: translateY(-20px);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+
+      100% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* ring glow behind pill */
+    .wf-pill-ring {
+      position: absolute;
+      right: -6px;
+      top: -6px;
+      width: 72px;
+      height: 72px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.06), rgba(7, 193, 128, 0.05) 40%, transparent 60%);
+      filter: blur(6px);
+      pointer-events: none;
+      opacity: 0.9;
+      transform: translateZ(0);
+    }
+
+    /* apply animations */
+    .wechat-pill {
+      animation: wfSlideIn .6s cubic-bezier(.2, .9, .3, 1) both, wfFloat 3.6s ease-in-out infinite;
+    }
+
+    /* Modal/backdrop/card - keep same modern styling but responsive */
+    .wechat-floating-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1650;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wechat-floating-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 9, 18, 0.56);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity .28s ease;
+    }
+
+    .wechat-floating-card {
+      position: relative;
+      z-index: 1651;
+      background: #fff;
+      max-width: 420px;
+      width: 92%;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 20px 60px rgba(3, 9, 18, 0.22);
+      transform: translateY(-8px) scale(.98);
+      opacity: 0;
+      transition: transform .28s cubic-bezier(.22, .9, .17, 1), opacity .28s ease;
+      text-align: center;
+    }
+
+    /* show state toggled by JS */
+    .wechat-floating-modal.show .wechat-floating-backdrop {
+      opacity: 1;
+    }
+
+    .wechat-floating-modal.show .wechat-floating-card {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    /* close button */
+    .wechat-floating-close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      border: none;
+      background: transparent;
+      font-size: 20px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    /* card content */
+    .wechat-floating-body h4 {
+      margin: 6px 0 8px;
+      font-size: 20px;
+      color: #0b2540;
+    }
+
+    .wf-desc {
+      color: #58606a;
+      font-size: 14px;
+      margin: 0 0 14px;
+    }
+
+    .wf-qr-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .wf-qr {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 10px 28px rgba(2, 6, 23, 0.08);
+    }
+
+    .wf-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .btn.wf-btn {
+      padding: 9px 12px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      color: #0b2540;
+      border: 1px solid #e6eef8;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn.wf-btn-primary {
+      background: linear-gradient(180deg, #b18b5e, #9b7769);
+      color: #fff;
+      border: 0;
+      box-shadow: 0 10px 30px rgba(155, 119, 105, 0.16);
+    }
+
+    .wf-note {
+      font-size: 13px;
+      color: #6b7280;
+      margin: 8px 0 0;
+    }
+
+    /* responsive adjustments */
+    @media (max-width: 880px) {
+      .wechat-pill {
+        top: 180px;
+        right: 16px;
+        height: 48px;
+        padding: 10px 12px;
+        gap: 8px;
+      }
+
+      .wf-pill-icon {
+        width: 22px;
+        height: 22px;
+      }
+
+      .wf-pill-text {
+        font-size: 14px;
+      }
+
+      .wf-qr {
+        width: 150px;
+        height: 150px;
+      }
+
+      .wechat-floating-card {
+        padding: 14px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .wechat-pill {
+        top: 180px;
+        right: 12px;
+        width: auto;
+        height: 44px;
+        padding: 8px 10px;
+        border-radius: 10px;
+      }
+
+      .wf-pill-text {
+        display: none;
+      }
+
+      /* hide text on very small screens for space */
+    }
+  </style>
+
+  <style>
+    /* Ensure Google Translate is visible on all screens */
+    #google_translate_element {
+      display: block !important;
+      position: relative !important;
+      z-index: 9999 !important;
+      width: auto !important;
+      text-align: right;
+      padding-right: 10px;
+      padding-top: 10px;
+      padding-left: 10px;
+      background-color: white;
+    }
+
+    /* Force show the dropdown combo */
+    .goog-te-gadget {
+      height: auto !important;
+      overflow: visible !important;
+    }
+
+    .goog-te-gadget-simple {
+      background-color: transparent !important;
+      border: none !important;
+      font-size: 14px !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      color: rgb(0, 0, 0) !important;
+      /* if your header is dark */
+    }
+
+    /* The select dropdown itself */
+    .goog-te-combo {
+      display: inline-block !important;
+      visibility: visible !important;
+      width: auto !important;
+      height: auto !important;
+      padding: 6px 8px !important;
+      font-size: 14px !important;
+      border-radius: 6px !important;
+      border: 1px solid rgba(0, 0, 0, 0.2) !important;
+      background: rgba(0, 0, 0, 0.1) !important;
+      color: #000000 !important;
+    }
+
+    /* Fix hidden iframe on mobile */
+    .goog-te-banner-frame.skiptranslate,
+    iframe.goog-te-menu-frame {
+      display: block !important;
+      visibility: visible !important;
+      height: auto !important;
+      opacity: 1 !important;
+    }
+
+    /* Override templates that hide translate */
+    body {
+      top: 0 !important;
+    }
+
+    .goog-te-banner-frame.skiptranslate {
+      display: none !important;
+    }
+
+    /* Make sure nothing hides the translate on small screens */
+    @media (max-width: 768px) {
+      #google_translate_element {
+        display: block !important;
+        position: absolute !important;
+        z-index: 9999;
+      }
+
+      .goog-te-combo {
+        font-size: 13px !important;
+        padding: 5px 6px !important;
+        background: #ffffff !important;
+        color: #000 !important;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- header -->
+  <header class="header-area header-three">
+    <div id="google_translate_element"></div>
+    <div id="header-sticky" class="menu-area">
+      <div class="container">
+        <div class="second-menu">
+          <div class="row align-items-center">
+
+            <!-- LOGO -->
+            <div class="col-xl-2 col-lg-2">
+              <div class="logo">
+                <a href="index.html">
+                  <img src="./img/logo/logo.png" alt="logo">
+                </a>
+              </div>
+            </div>
+
+            <!-- MAIN NAVIGATION -->
+            <div class="col-xl-7 col-lg-7">
+              <div class="main-menu text-right text-xl-right">
+                <nav id="mobile-menu">
+                  <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#service">Services</a></li>
+                    <!-- <li><a href="#gallery" id="gallery">Gallery</a></li> -->
+                    <li><a href="#pricing">Pricing</a></li>
+                    <!-- <li><a href="#blog" id="blog">Blog</a></li> -->
+                    <li><a href="#footer">Contact</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+
+            <!-- BOOK APPOINTMENT BUTTON -->
+            <div class="col-xl-3 col-lg-3 text-right d-none d-lg-block mt-25 mb-25 text-right text-xl-right">
+              <div class="login">
+                <ul>
+                  <li>
+                    <div class="second-header-btn">
+                      <a href="contact.html" class="btn">Book Appointment</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- MOBILE MENU -->
+            <div class="col-12">
+              <div class="mobile-menu"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- header-end -->
+  <!-- main-area -->
+  <main>
+
+    <!-- search-popup -->
+    <div class="modal fade bs-example-modal-lg search-bg popup1" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content search-popup">
+          <div class="text-center">
+            <a href="#" class="close2" data-dismiss="modal" aria-label="Close">× close</a>
+          </div>
+          <div class="row search-outer">
+            <div class="col-md-11"><input type="text" placeholder="Search for products..." /></div>
+            <div class="col-md-1 text-right"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /search-popup -->
+    <!-- slider-area -->
+    <section id="home" class="slider-area fix p-relative">
+
+      <div class="slider-active" style="background: #00173c;">
+        <div class="single-slider slider-bg d-flex align-items-center"
+          style="background-image: url(img/slider/slider_bg.png); background-size: cover;">
+          <div class="container">
+            <div class="row justify-content-center align-items-center">
+
+              <div class="col-lg-6 col-md-6">
+                <div class="slider-content s-slider-content mt-20">
+                  <h5 data-animation="fadeInUp" data-delay=".4s">Cosmetic Enhancement</h5>
+                  <h2 data-animation="fadeInUp" data-delay=".4s">Botox Treatments<br>for a Smooth, Refreshed Look</h2>
+                  <p data-animation="fadeInUp" data-delay=".6s">
+                    Smooth fine lines, reduce wrinkles, and rejuvenate your appearance with safe, expert Botox
+                    treatments.
+                    Quick sessions, minimal downtime, and natural-looking results that enhance your confidence.
+                  </p>
+
+                  <div class="slider-btn mt-30">
+                    <!-- <a href="contact.html" class="btn ss-btn mr-15">Learn More</a> -->
+                    <a href="contact.html" class="btn ss-btn active">Book Now</a>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 p-relative">
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- slider-area-end -->
+    <!-- feature-area -->
+    <section class="feature-area p-relative fix">
+      <div class="containe-fluid">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="feature-box">
+              <div class="text">
+                <h5>For Forehead Lines</h5>
+                <h3>Smooth Away Wrinkles <br>& Fine Lines</h3>
+              </div>
+              <img src="./img/features/banner-01.png" alt="forehead-treatment">
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="feature-box">
+              <div class="text">
+                <h5>For Eyes & Brow Area</h5>
+                <h3>Reduce Crow’s Feet <br> & Lift Your Expression</h3>
+              </div>
+              <img src="img/features/banner-02.png" alt="eye-area-treatment">
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="feature-box">
+              <div class="text">
+                <h5>For Facial Balance</h5>
+                <h3>Enhance Natural Definition <br>& Refresh Your Look</h3>
+              </div>
+              <img src="img/features/banner-03.png" alt="facial-balance-treatment">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- feature-area-end -->
+    <!-- about-area -->
+    <section class="about-area about-p pt-120 pb-120 p-relative fix" id="about"
+      style="background: url(img/bg/about-bg.png); background-size: contain; background-position: center center; background-repeat: no-repeat;">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="s-about-img p-relative wow fadeInLeft animated" data-animation="fadeInLeft" data-delay=".4s">
+              <img src="img/features/about_img.png" alt="img" style="border-radius: 10px;">
+              <div class="about-text second-about">
+                <span>Glow</span>
+                <p></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="about-content s-about-content wow fadeInRight animated" data-animation="fadeInRight"
+              data-delay=".4s">
+              <div class="about-title second-title pb-25">
+                <h5>About Us</h5>
+                <h2>Bringing Out Your Natural Beauty</h2>
+              </div>
+              <p>
+                We specialize in advanced skincare and cosmetic treatments that help you achieve healthy, radiant, and
+                rejuvenated skin. Every treatment is tailored to your individual needs to ensure visible results and
+                complete comfort.
+              </p>
+              <p>
+                Our goal is to provide a relaxing and professional experience that enhances your confidence and natural
+                glow through personalized care and the latest beauty techniques.
+              </p>
+              <!-- <div class="slider-btn mt-20">                                          
+                        <a href="about.html" class="btn ss-btn smoth-scroll">Explore More</a>				
+                    </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- about-area-end -->
+    <!-- service-details2-area -->
+    <section id="service" class="service-details-two pb-105 p-relative"
+      style="background: url(img/bg/services-bg.png); background-size: contain; background-position: center center; background-repeat: no-repeat;">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-12">
+            <div class="section-title center-align mb-50 text-center">
+              <h5>Our Services</h5>
+              <h2>What We Provide</h2>
+            </div>
+          </div>
+
+          <!-- Left Column -->
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="about-content s-about-content">
+              <ul class="sr-tw-ul">
+                <li>
+                  <div class="icon-right">
+                    <span class="material-icons" style="font-size:36px;color:#b18b5e;">spa</span>
+                  </div>
+                  <div class="text">
+                    <h4>Skin Glow Treatment</h4>
+                    <p>Restore brightness and even tone with our glow-enhancing sessions.</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="icon-right">
+                    <span class="material-icons" style="font-size:36px;color:#b18b5e;">face_retouching_natural</span>
+                  </div>
+                  <div class="text">
+                    <h4>Anti-Aging Therapy</h4>
+                    <p>Smooth fine lines and rejuvenate your natural facial contour.</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="icon-right">
+                    <span class="material-icons" style="font-size:36px;color:#b18b5e;">healing</span>
+                  </div>
+                  <div class="text">
+                    <h4>Acne & Scar Care</h4>
+                    <p>Targeted treatments to clear acne and fade scars gently.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Center Image -->
+          <div class="col-lg-4 col-md-12 col-sm-12 text-center d-none d-lg-block">
+            <div class="sd-img">
+              <img src="img/features/services-img-details2.png" alt="clinic-services">
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="about-content s-about-content">
+              <ul class="sr-tw-ul sr-thr-ul">
+                <li>
+                  <div class="icon-right">
+                    <span class="material-icons" style="font-size:36px;color:#b18b5e;">auto_awesome</span>
+                  </div>
+                  <div class="text pt-10">
+                    <h4>Skin Tightening</h4>
+                    <p>Non-surgical lift to firm, tone, and refine your skin texture.</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="icon-right">
+                    <span class="material-icons" style="font-size:36px;color:#b18b5e;">content_cut</span>
+                  </div>
+                  <div class="text pt-10">
+                    <h4>Laser Hair Removal</h4>
+                    <p>Safe, effective laser solution for smooth, hair-free skin.</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="icon-right">
+                    <span class="material-icons" style="font-size:36px;color:#b18b5e;">water_drop</span>
+                  </div>
+                  <div class="text pt-10">
+                    <h4>Hydra Facial</h4>
+                    <p>Deep cleansing and hydration for lasting freshness and glow.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- service-details2-area-end -->
+
+    <!-- gallery-area -->
+    <section id="work" class="pt-120 pb-110"
+      style="background: url(img/bg/gallery-bg.png); background-size: cover; background-position: center center; background-repeat: no-repeat;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-title text-center mb-40 wow fadeInDown animated" data-animation="fadeInDown"
+              data-delay=".4s">
+              <h5>Before & After</h5>
+              <h2>Real Results That Speak for Themselves</h2>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scrollable Before & After Gallery -->
+        <div class="gallery-wrapper position-relative">
+          <button class="gallery-btn gallery-prev" aria-label="Scroll left">&#10094;</button>
+          <div class="gallery-scroll d-flex align-items-center">
+            <div class="gallery-track d-flex">
+
+              <!-- Each image box -->
+              <div class="before-after-box">
+                <figure class="gallery-image">
+                  <img src="img/gallery/1.png" alt="Before & After 1" class="img">
+                </figure>
+              </div>
+
+              <div class="before-after-box">
+                <figure class="gallery-image">
+                  <img src="img/gallery/2.png" alt="Before & After 2" class="img">
+                </figure>
+              </div>
+
+              <div class="before-after-box">
+                <figure class="gallery-image">
+                  <img src="img/gallery/3.png" alt="Before & After 3" class="img">
+                </figure>
+              </div>
+
+              <div class="before-after-box">
+                <figure class="gallery-image">
+                  <img src="img/gallery/1.png" alt="Before & After 4" class="img">
+                </figure>
+              </div>
+
+              <div class="before-after-box">
+                <figure class="gallery-image">
+                  <img src="img/gallery/2.png" alt="Before & After 5" class="img">
+                </figure>
+              </div>
+
+              <div class="before-after-box">
+                <figure class="gallery-image">
+                  <img src="img/gallery/3.png" alt="Before & After 6" class="img">
+                </figure>
+              </div>
+
+              <div class="before-after-box">
+                <figure class="gallery-image">
+                  <img src="img/gallery/1.png" alt="Before & After 7" class="img">
+                </figure>
+              </div>
+
+              <div class="before-after-box">
+                <figure class="gallery-image">
+                  <img src="img/gallery/2.png" alt="Before & After 8" class="img">
+                </figure>
+              </div>
+
+              <div class="before-after-box">
+                <figure class="gallery-image">
+                  <img src="img/gallery/3.png" alt="Before & After 9" class="img">
+                </figure>
+              </div>
+
+              <div class="before-after-box">
+                <figure class="gallery-image">
+                  <img src="img/gallery/1.png" alt="Before & After 10" class="img">
+                </figure>
+              </div>
+
+            </div>
+          </div>
+          <button class="gallery-btn gallery-next" aria-label="Scroll right">&#10095;</button>
+        </div>
+      </div>
+    </section>
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const scrollContainer = document.querySelector(".gallery-scroll");
+        const btnNext = document.querySelector(".gallery-next");
+        const btnPrev = document.querySelector(".gallery-prev");
+
+        btnNext.addEventListener("click", () => {
+          scrollContainer.scrollBy({ left: 400, behavior: "smooth" });
+        });
+        btnPrev.addEventListener("click", () => {
+          scrollContainer.scrollBy({ left: -400, behavior: "smooth" });
+        });
+      });
+    </script>
+
+
+    <!-- gallery-area-end -->
+
+    <!-- Achieve Flawless Skin -->
+
+    <!-- Interactive face map section (responsive) -->
+    <section id="face-map-section" class="pt-80 pb-80">
+      <div class="container">
+        <div class="row align-items-center">
+          <!-- LEFT: heading + treatment buttons -->
+          <div class="col-lg-6 col-md-12">
+            <div class="s-slider-content section-title">
+              <h5>Achieve Flawless Skin</h5>
+              <h2>Revitalize Your Look</h2>
+              <p class="lead" style="color:#6b7280;">
+                Click any treatment to see its location and price on the face. Tap dots on mobile.
+              </p>
+
+              <div class="mt-25" id="treatmentButtonsContainer">
+                <!-- Buttons: data-target must match the dot id -->
+                <button type="button" class="face-map-btn" data-target="dot-forehead">Forehead</button>
+                <button type="button" class="face-map-btn" data-target="dot-brow">Brow Lift</button>
+                <button type="button" class="face-map-btn" data-target="dot-crows">Crow's Feet</button>
+                <button type="button" class="face-map-btn" data-target="dot-nasolabial">Nasolabial Folds</button>
+                <button type="button" class="face-map-btn" data-target="dot-gummy">Chin Dimpling</button>
+                <button type="button" class="face-map-btn" data-target="dot-lip">Lip Flip</button>
+                <button type="button" class="face-map-btn" data-target="dot-masseter">Masseter</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: face image with dots -->
+          <div class="col-lg-6 col-md-12">
+            <div class="face-map-image-wrap" style="position:relative; max-width:700px; margin:auto;">
+              <!-- Replace src with your actual image path -->
+              <img src="./img/gallery/face.jpg" alt="Face map" class="face-map-image"
+                style="width:100%; height:auto; display:block; border-radius:12px;">
+
+              <!-- Dots: set left/top as percentages to match image -->
+              <button class="face-dot" id="dot-forehead" data-name="Forehead" data-price="$120"
+                style="left:51%; top:26%;" aria-label="Forehead"></button>
+
+              <button class="face-dot" id="dot-brow" data-name="Brow Lift" data-price="$150" style="left:61%; top:30%;"
+                aria-label="Brow Lift"></button>
+
+              <button class="face-dot" id="dot-crows" data-name="Crow's Feet" data-price="$95"
+                style="left:36%; top:38%;" aria-label="Crow's Feet"></button>
+
+              <button class="face-dot" id="dot-nasolabial" data-name="Nasolabial Folds" data-price="$130"
+                style="left:40%; top:48%;" aria-label="Nasolabial Folds"></button>
+
+              <button class="face-dot" id="dot-gummy" data-name="Chin Dimpling" data-price="$100"
+                style="left:52%; top:64%;" aria-label="Chin Dimpling"></button>
+
+              <button class="face-dot" id="dot-lip" data-name="Lip Flip" data-price="$110" style="left:52%; top:57%;"
+                aria-label="Lip Flip"></button>
+
+              <button class="face-dot" id="dot-masseter" data-name="Masseter" data-price="$200"
+                style="left:60%; top:56%;" aria-label="Masseter"></button>
+
+              <!-- Tooltip (re-used) -->
+              <div class="face-tooltip" id="faceTooltip" aria-hidden="true">
+                <div class="tt-name" id="ttName">Treatment</div>
+                <div class="tt-price" id="ttPrice">$0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <script>
+        (function () {
+          const buttons = document.querySelectorAll('.face-map-btn');
+          const dots = document.querySelectorAll('.face-dot');
+          const tooltip = document.getElementById('faceTooltip');
+          const ttName = document.getElementById('ttName');
+          const ttPrice = document.getElementById('ttPrice');
+          const imageWrap = document.querySelector('.face-map-image-wrap');
+
+          function clearActive() {
+            buttons.forEach(b => b.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            tooltip.style.display = 'none';
+            tooltip.setAttribute('aria-hidden', 'true');
+          }
+
+          function positionTooltip(dotEl) {
+            const wrapRect = imageWrap.getBoundingClientRect();
+            const dotRect = dotEl.getBoundingClientRect();
+            const tt = tooltip;
+            const margin = 8;
+
+            // default position: below-right of dot
+            let left = dotRect.left - wrapRect.left + dotRect.width / 2 + 8;
+            let top = dotRect.top - wrapRect.top + dotRect.height / 2 + 8;
+
+            // set width and temporarily show to measure height
+            const ttMax = Math.min(260, wrapRect.width * 0.45);
+            tt.style.maxWidth = ttMax + 'px';
+            tt.style.display = 'block';
+            tt.style.visibility = 'hidden';
+            const measureH = tt.offsetHeight;
+            tt.style.visibility = '';
+
+            // if bottom overflows, place above
+            if (top + measureH + margin > wrapRect.height) {
+              top = dotRect.top - wrapRect.top - measureH - 12;
+            }
+
+            // handle right overflow
+            if (left + ttMax + margin > wrapRect.width) left = wrapRect.width - ttMax - margin;
+            if (left < margin) left = margin;
+
+            tt.style.left = left + 'px';
+            tt.style.top = top + 'px';
+            tt.style.display = 'block';
+            tt.setAttribute('aria-hidden', 'false');
+          }
+
+          // button click opens its dot + tooltip
+          buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const targetId = btn.dataset.target;
+              const dot = document.getElementById(targetId);
+              if (!dot) return;
+              const already = btn.classList.contains('active');
+              clearActive();
+              if (!already) {
+                btn.classList.add('active');
+                dot.classList.add('active');
+                ttName.textContent = dot.dataset.name || 'Treatment';
+                ttPrice.textContent = dot.dataset.price ? dot.dataset.price + ' / Varies' : 'Price varies';
+                positionTooltip(dot);
+              }
+            });
+          });
+
+          // clicking dot also activates button + shows tooltip
+          dots.forEach(dot => {
+            dot.tabIndex = 0;
+            dot.addEventListener('click', () => {
+              clearActive();
+              dot.classList.add('active');
+              const btn = Array.from(buttons).find(b => b.dataset.target === dot.id);
+              if (btn) btn.classList.add('active');
+              ttName.textContent = dot.dataset.name || 'Treatment';
+              ttPrice.textContent = dot.dataset.price ? dot.dataset.price + ' / Varies' : 'Price varies';
+              positionTooltip(dot);
+            });
+            dot.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); dot.click(); }
+            });
+          });
+
+          // close when clicking outside
+          document.addEventListener('click', (e) => {
+            const inside = imageWrap.contains(e.target) || Array.from(buttons).some(b => b.contains(e.target));
+            if (!inside) clearActive();
+          });
+
+          // reposition on resize/scroll
+          window.addEventListener('resize', () => {
+            const active = document.querySelector('.face-dot.active');
+            if (active) positionTooltip(active);
+          });
+          window.addEventListener('scroll', () => {
+            const active = document.querySelector('.face-dot.active');
+            if (active) positionTooltip(active);
+          });
+        })();
+      </script>
+    </section>
+
+
+    <!-- Achieve Flawless Skin end -->
+
+    <!-- booking-area -->
+    <section id="booking" class="booking-area p-relative pt-120 pb-120"
+      style="background: url(img/bg/ap-bg.png); background-size: cover; background-position: center center; background-repeat: no-repeat;">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+
+            <div class="contact-bg">
+              <div class="section-title center-align">
+                <h5>Get In Touch</h5>
+                <h2>Book an Appointment</h2>
+                <p>
+                  To schedule your appointment quickly, please contact us on WeChat — our team will confirm your
+                  preferred date and time. For urgent enquiries call the clinic directly.
+                </p>
+              </div>
+
+              <div class="contact-info mt-10" style="text-align:left; color:#333;">
+                <p><strong>How to book:</strong> Tap the button below to open our WeChat contact modal. Our receptionist
+                  will reply and help you pick the best slot.</p>
+                <p><strong>Phone (for urgent help):</strong> <a href="tel:+91 123 456 789">+91 123 456 789</a></p>
+                <p><strong>Email:</strong> <a href="mailto:onezonecosmetic@gmail.com">onezonecosmetic@gmail.com</a></p>
+              </div>
+
+              <div class="slider-btn mt-10">
+                <!-- keep id so you can hook it later to open the WeChat modal -->
+                <button id="book-now-btn" class="btn ss-btn" aria-haspopup="dialog" aria-controls="wechatFloatingModal">
+                  Book Now
+                </button>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="col-lg-6">
+            <div class="opening-time">
+              <div class="open-img">
+                <img src="img/bg/open-box-img.png" alt="opening-hours">
+              </div>
+              <h3>Opening Hours</h3>
+
+              <div class="text">
+                <div class="left-text">Monday – Friday:</div>
+                <div class="right-text">09:00 am – 10:00 pm</div>
+              </div>
+
+              <div class="text">
+                <div class="left-text">Saturday:</div>
+                <div class="right-text">09:00 am – 08:00 pm</div>
+              </div>
+
+              <div class="text">
+                <div class="left-text">Sunday:</div>
+                <div class="right-text">09:00 am – 05:00 pm</div>
+              </div>
+
+              <div class="discount">Check seasonal offers and packages — contact us for details.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- booking-area-end -->
+
+    <!-- pricing-area -->
+    <section id="pricing" class="pricing-area pb-60 fix p-relative" id="pricing"
+      style="background: url(img/bg/services-bg.png); background-size: contain; background-position: center center; background-repeat: no-repeat;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-title text-center mb-50 wow fadeInDown animated" data-animation="fadeInDown"
+              data-delay=".4s">
+              <h5>Choose Package</h5>
+              <h2>Our Treatment Plans</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="row pcolor">
+
+          <!-- Basic Plan -->
+          <div class="col-lg-4 col-md-6">
+            <div class="pricing-box pricing-box2 text-center mb-60">
+              <div class="pricing-head">
+                <h3>Basic Skin Brightening</h3>
+                <div class="price-count">
+                  <h2>$1,499 <span>/ Session</span></h2>
+                  <p>Perfect starter for dull or uneven skin — restores natural brightness and clarity.</p>
+                </div>
+                <hr>
+              </div>
+
+              <div class="pricing-body mt-20 mb-30 text-left">
+                <ul>
+                  <li>Skin analysis & consultation</li>
+                  <li>Deep cleansing & exfoliation</li>
+                  <li>Brightening serum application</li>
+                  <li>Hydration & glow therapy</li>
+                  <li>15-minute relaxing finish</li>
+                </ul>
+              </div>
+
+              <div class="pricing-btn">
+                <a href="contact.html" class="btn ss-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advanced Plan -->
+          <div class="col-lg-4 col-md-6">
+            <div class="pricing-box pricing-box2 active text-center mb-60">
+              <div class="pricing-head">
+                <h3>Advanced Rejuvenation</h3>
+                <div class="price-count">
+                  <h2>$2,499 <span>/ Session</span></h2>
+                  <p>Ideal for those looking to reduce fine lines, acne marks, and uneven texture.</p>
+                </div>
+                <hr>
+              </div>
+
+              <div class="pricing-body mt-20 mb-30 text-left">
+                <ul>
+                  <li>Personalized skin consultation</li>
+                  <li>Hydra facial + LED therapy</li>
+                  <li>Acne or pigmentation treatment</li>
+                  <li>Cooling vitamin-infused mask</li>
+                  <li>Visible results in one visit</li>
+                </ul>
+              </div>
+
+              <div class="pricing-btn">
+                <a href="contact.html" class="btn ss-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Premium Plan -->
+          <div class="col-lg-4 col-md-6">
+            <div class="pricing-box pricing-box2 text-center mb-60">
+              <div class="pricing-head">
+                <h3>Premium Revitalize</h3>
+                <div class="price-count">
+                  <h2>$3,999 <span>/ Session</span></h2>
+                  <p>Comprehensive skin renewal that combines deep hydration, rejuvenation, and lift.</p>
+                </div>
+                <hr>
+              </div>
+
+              <div class="pricing-body mt-20 mb-30 text-left">
+                <ul>
+                  <li>Advanced skin tightening treatment</li>
+                  <li>Hydra facial + oxygen therapy</li>
+                  <li>Gold mask + vitamin C boost</li>
+                  <li>Targeted rejuvenation care</li>
+                  <li>Complimentary follow-up check</li>
+                </ul>
+              </div>
+
+              <div class="pricing-btn">
+                <a href="contact.html" class="btn ss-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- pricing-area-end -->
+
+    <!-- testimonial-area -->
+    <section class="testimonial-area pt-120 pb-60 p-relative fix"
+      style="background: url(img/bg/test-bg.png); background-position: center center; background-repeat: no-repeat;">
+      <div class="container">
+        <div class="row">
+          <!-- Left Title Section -->
+          <div class="col-lg-4">
+            <div class="section-title mb-50 wow fadeInDown animated" data-animation="fadeInDown" data-delay=".4s">
+              <h5>Client Reviews</h5>
+              <h2>What Our Clients Say</h2>
+              <p class="mt-15">
+                Our clients love the care, professionalism, and lasting results they experience here.
+                Here are some of their kind words about their journey with us.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Testimonials -->
+          <div class="col-lg-8">
+            <div class="testimonial-active">
+
+              <!-- Testimonial 1 -->
+              <div class="single-testimonial">
+                <div class="testi-author">
+                  <!-- <img src="img/testimonial/testi_avatar.png" alt="img"> -->
+                  <div class="ta-info">
+                    <h6>Emma Williams</h6>
+                    <span>Client</span>
+                  </div>
+                </div>
+                <p>“The staff were so welcoming and professional. My treatment was relaxing, and the results are
+                  amazing. My skin has never looked this healthy before!”</p>
+              </div>
+
+              <!-- Testimonial 2 -->
+              <div class="single-testimonial">
+                <div class="testi-author">
+                  <!-- <img src="img/testimonial/testi_avatar_02.png" alt="img"> -->
+                  <div class="ta-info">
+                    <h6>Michael Carter</h6>
+                    <span>Client</span>
+                  </div>
+                </div>
+                <p>“The entire experience was wonderful! The team explained every step clearly and made sure I felt
+                  comfortable. The improvement in my skin is visible and lasting.”</p>
+
+              </div>
+
+              <!-- Testimonial 3 -->
+              <div class="single-testimonial">
+                <div class="testi-author">
+                  <!-- <img src="img/testimonial/testi_avatar.png" alt="img"> -->
+                  <div class="ta-info">
+                    <h6>Sophia Patel</h6>
+                    <span>Client</span>
+                  </div>
+                </div>
+                <p>“From the moment I entered, I felt relaxed and cared for. The treatments are gentle but very
+                  effective. I’m thrilled with the results and highly recommend this clinic.”</p>
+
+              </div>
+
+              <!-- Testimonial 4 -->
+              <div class="single-testimonial">
+                <div class="testi-author">
+                  <!-- <img src="img/testimonial/testi_avatar_02.png" alt="img"> -->
+                  <div class="ta-info">
+                    <h6>David Miller</h6>
+                    <span>Client</span>
+                  </div>
+                </div>
+                <p>“Truly a wonderful experience from start to finish. The clinic is calming, the staff is friendly, and
+                  the treatments are top-notch. I feel refreshed every visit.”</p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- WECHAT FLOAT HTML -->
+    <!-- ================= Rectangular Animated WeChat Floating Widget (top:150px) ================= -->
+    <div id="wechat-floating-widget" aria-hidden="false">
+      <!-- Floating pill button: icon + text -->
+      <button id="wechatFloatBtn" class="wechat-pill" title="Contact us on WeChat" aria-label="Open WeChat dialog"
+        aria-haspopup="dialog" aria-controls="wechatFloatingModal">
+        <img src="./icon/wechat.svg" alt="" class="wf-pill-icon" aria-hidden="true">
+        <span class="wf-pill-text">WeChat</span>
+        <span class="wf-pill-ring" aria-hidden="true"></span>
+      </button>
+
+      <!-- Modal -->
+      <div id="wechatFloatingModal" class="wechat-floating-modal" role="dialog" aria-modal="true"
+        aria-labelledby="wechatFloatingTitle" style="display:none;">
+        <div class="wechat-floating-backdrop" id="wechatFloatingBackdrop" tabindex="-1"></div>
+
+        <div class="wechat-floating-card" role="document" aria-describedby="wechatFloatingDesc">
+          <button id="wechatFloatingClose" class="wechat-floating-close" aria-label="Close dialog">✕</button>
+
+          <div class="wechat-floating-body">
+            <h4 id="wechatFloatingTitle">Chat with us on WeChat</h4>
+            <p id="wechatFloatingDesc" class="wf-desc">Scan the QR code with your WeChat app to add our account — or tap
+              the button if you’re on mobile with WeChat installed.</p>
+
+            <div class="wf-qr-wrap">
+              <img src="img/wechat-qr.png" alt="WeChat QR code" class="wf-qr">
+            </div>
+
+            <div class="wf-actions">
+              <a href="weixin://dl/chat?YourWeChatID" id="wechatOpenMobile" class="btn wf-btn wf-btn-primary"
+                target="_blank" rel="noopener noreferrer">Open in WeChat</a>
+              <button id="wechatCopyId" class="btn wf-btn" title="Copy WeChat ID">Copy WeChat ID</button>
+            </div>
+
+            <p class="wf-note">If you are on desktop, open WeChat on your phone → Discover → Scan and point at the code
+              above.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </main>
+  <!-- main-area-end -->
+  <!-- footer -->
+  <footer class="footer-bg footer-p pt-90" id="footer"
+    style="background-color: #252525; background-image: url(img/bg/footer-bg.png);">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row justify-content-between">
+
+          <!-- BRAND & SHORT DESCRIPTION -->
+          <div class="col-xl-4 col-lg-4 col-sm-6">
+            <div class="footer-widget mb-30">
+              <div class="f-widget-title mb-40">
+                <img src="img/logo/f_logo.png" alt="logo" style="background-color: white; border-radius: 4px;">
+              </div>
+              <div class="footer-link">
+                <p>
+                  At One Zone Health & Cosmetic Clinic, we provide trusted skin and wellness treatments using advanced
+                  technology and personalized care.
+                </p>
+
+
+              </div>
+            </div>
+          </div>
+
+          <!-- OTHER LINKS -->
+          <div class="col-xl-2 col-lg-2 col-sm-6">
+            <div class="footer-widget mb-30">
+              <div class="f-widget-title">
+                <h2>Quick Links</h2>
+              </div>
+              <div class="footer-link">
+                <ul>
+                  <li><a href="#home">Home</a></li>
+                  <li><a href="#about">About Us</a></li>
+                  <li><a href="#service">Services</a></li>
+                  <li><a href="#footer">Contact Us</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- SERVICES LIST -->
+          <div class="col-xl-2 col-lg-2 col-sm-6">
+            <div class="footer-widget mb-30">
+              <div class="f-widget-title">
+                <h2>Treatments</h2>
+              </div>
+              <div class="footer-link">
+                <ul>
+                  <li><a href="#">Skin Rejuvenation</a></li>
+                  <li><a href="#">Acne & Scar Care</a></li>
+                  <li><a href="#">Anti-Aging Therapy</a></li>
+                  <li><a href="#">Laser Hair Removal</a></li>
+                  <li><a href="#">Pigmentation Control</a></li>
+                  <li><a href="#">Hydra Facial</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUBSCRIBE + SOCIAL -->
+          <div class="col-xl-3 col-lg-3 col-sm-6">
+            <div class="footer-widget mb-30">
+              <div class="f-widget-title">
+                <h2>Stay Connected</h2>
+              </div>
+
+
+              <div class="footer-social mt-10">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- COPYRIGHT ROW -->
+        <div class="row align-items-center copyright-wrap">
+          <div class="col-lg-6">
+            <div class="copy-text">
+              Copyright &copy; 2025 <a href="#">One Zone Health & Cosmetic Clinic</a>. All rights reserved.
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="copay-contact">
+              <ul>
+                <li>
+                  <div class="c-contact">
+                    <div class="icon">
+                      <img src="./icon/ft-icon02.png" alt="email icon">
+                    </div>
+                    <div class="text">
+                      <h3>Email Us:</h3>
+                      <span><a href="mailto:onezonecosmetic@gmail.com">onezonecosmetic@gmail.com</a></span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="c-contact">
+                    <div class="icon">
+                      <img src="./icon/ft-icon03.png" alt="phone icon">
+                    </div>
+                    <div class="text">
+                      <h3>Call Now:</h3>
+                      <span><a href="tel:+915989874987">+91 123 456 789</a></span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> <!-- /.copyright-wrap -->
+
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- footer-end -->
+
+  <script>
+    (function () {
+      const floatBtn = document.getElementById('wechatFloatBtn');
+      const modalWrap = document.getElementById('wechatFloatingModal');
+      const backdrop = document.getElementById('wechatFloatingBackdrop');
+      const closeBtn = document.getElementById('wechatFloatingClose');
+      const copyBtn = document.getElementById('wechatCopyId');
+      const mobileOpen = document.getElementById('wechatOpenMobile');
+
+      // Set your WeChat ID here (used for copy)
+      const WECHAT_ID = 'YourWeChatID'; // <-- change this to the real ID
+
+      // Open / Close helpers
+      function openModal() {
+        if (!modalWrap) return;
+        modalWrap.classList.add('show');
+        modalWrap.style.display = 'flex';
+        modalWrap.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        // focus close button for accessibility
+        closeBtn && closeBtn.focus();
+      }
+      function closeModal() {
+        if (!modalWrap) return;
+        modalWrap.classList.remove('show');
+        // hide after animation
+        setTimeout(() => { modalWrap.style.display = 'none'; }, 300);
+        modalWrap.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        floatBtn && floatBtn.focus();
+      }
+
+      // wire the floating button (if present) to open modal (keeps existing behavior)
+      if (floatBtn) {
+        floatBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          openModal();
+        });
+      }
+
+      // Attach close listeners
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (backdrop) backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+      // Copy ID button
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async function () {
+          try {
+            await navigator.clipboard.writeText(WECHAT_ID);
+            const original = copyBtn.textContent;
+            copyBtn.textContent = 'Copied ✓';
+            setTimeout(() => { copyBtn.textContent = original; }, 1600);
+          } catch (err) {
+            const original = copyBtn.textContent;
+            copyBtn.textContent = 'Copy failed';
+            setTimeout(() => { copyBtn.textContent = original; }, 1600);
+          }
+        });
+      }
+
+      // Hide mobile deep link on non-mobile (if present)
+      function isMobile() { return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent); }
+      if (mobileOpen && !isMobile()) mobileOpen.style.display = 'none';
+
+      // Focus-trap (basic) inside modal
+      if (modalWrap) {
+        modalWrap.addEventListener('keydown', function (e) {
+          if (e.key !== 'Tab') return;
+          const focusable = modalWrap.querySelectorAll('a, button, input, textarea, [tabindex]:not([tabindex="-1"])');
+          if (!focusable.length) return;
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        });
+      }
+
+      // --- NEW: Open modal when user clicks certain buttons/links ---
+      // Matches:
+      //  - any anchor whose href ends with "contact.html" (relative paths like "contact.html" or "./contact.html")
+      //  - a button with id "book-now-btn"
+      //  - any element with data-open-wechat="true" (optional attribute you can add later)
+      function attachOpeners() {
+        // anchors ending with contact.html
+        const anchors = Array.from(document.querySelectorAll('a[href$="contact.html"]'));
+        // explicit book button
+        const bookBtn = document.getElementById('book-now-btn');
+        // any elements marked explicitly
+        const dataOpeners = Array.from(document.querySelectorAll('[data-open-wechat="true"]'));
+
+        const openers = anchors.concat(bookBtn ? [bookBtn] : []).concat(dataOpeners);
+
+        openers.forEach(el => {
+          if (!el) return;
+          // avoid attaching twice
+          if (el.__wechatHandlerAttached) return;
+          el.addEventListener('click', function (evt) {
+            // if it's an anchor, prevent navigation
+            if (evt && evt.preventDefault) evt.preventDefault();
+            openModal();
+          });
+          el.__wechatHandlerAttached = true;
+        });
+      }
+
+      // Run once now and again after load (in case dynamic content is added)
+      attachOpeners();
+      // If your site loads nav/buttons later, re-run attachOpeners after short delay
+      setTimeout(attachOpeners, 800);
+
+    })();
+  </script>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        { pageLanguage: 'en' },
+        'google_translate_element'
+      );
+    }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+
+  <!-- JS here -->
+  <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+  <script src="js/vendor/jquery-3.6.0.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/slick.min.js"></script>
+  <script src="js/ajax-form.js"></script>
+  <script src="js/paroller.js"></script>
+  <script src="js/wow.min.js"></script>
+  <script src="js/js_isotope.pkgd.min.js"></script>
+  <script src="js/imagesloaded.min.js"></script>
+  <script src="js/parallax.min.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.counterup.min.js"></script>
+  <script src="js/jquery.scrollUp.min.js"></script>
+  <script src="js/jquery.meanmenu.min.js"></script>
+  <script src="js/parallax-scroll.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/element-in-view.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
