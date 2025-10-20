@@ -23,559 +23,495 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
 
-  <!-- Gallery Styles -->
-  <style>
-    .gallery-wrapper {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .gallery-scroll {
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-    }
-
-    .gallery-scroll::-webkit-scrollbar {
-      display: none;
-    }
-
-    .gallery-track {
-      display: flex;
-      gap: 20px;
-      padding: 10px 0;
-    }
-
-    .before-after-box {
-      flex: 0 0 auto;
-      width: 300px;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      transition: transform .3s ease;
-    }
-
-    .before-after-box:hover {
-      transform: scale(1.04);
-    }
-
-    .gallery-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-    }
-
-    .gallery-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgb(191, 105, 0);
-      color: #fff;
-      border: none;
-      font-size: 28px;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background-color .3s;
-      z-index: 10;
-      border: 2px solid #fff;
-    }
-
-    .gallery-btn:hover {
-      background-color: #b18b5e;
-    }
-
-    .gallery-prev {
-      left: 0px;
-    }
-
-    .gallery-next {
-      right: 0px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .before-after-box {
-        width: 220px;
-      }
-
-      .gallery-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 22px;
-      }
-    }
-  </style>
-
-  <!-- Gallery Scroll Buttons JS -->
-
-  <!-- Styles (scoped; move to your CSS file if you prefer) -->
-  <style>
-    /* Buttons (left side) */
-    .face-map-btn {
-      display: inline-block;
-      margin: 8px 8px 0 0;
-      padding: 10px 14px;
-      border-radius: 24px;
-      background: #fff;
-      border: 1px solid #e6e6e6;
-      cursor: pointer;
-      font-size: 14px;
-      color: #333;
-      transition: all .16s ease;
-      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
-    }
-
-    .face-map-btn:hover {
-      transform: translateY(-3px);
-    }
-
-    .face-map-btn.active {
-      background: #b18b5e;
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 12px 28px rgba(11, 18, 28, 0.12);
-    }
-
-    /* Dots (absolute, percent-based) */
-    .face-map-image-wrap {
-      position: relative;
-    }
-
-    .face-dot {
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.96);
-      border: 2px solid rgba(155, 119, 105, 0.95);
-      transform: translate(-50%, -50%);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 4;
-      transition: transform .18s ease, box-shadow .18s ease;
-      box-shadow: 0 8px 20px rgba(2, 6, 23, 0.08);
-    }
-
-    .face-dot::after {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(155, 119, 105, 0.95);
-      display: block;
-    }
-
-    .face-dot.active {
-      transform: translate(-50%, -50%) scale(1.25);
-      box-shadow: 0 16px 36px rgba(155, 119, 105, 0.18);
-    }
-
-    /* Tooltip card */
-    .face-tooltip {
-      position: absolute;
-      min-width: 160px;
-      background: #fff;
-      border-radius: 10px;
-      padding: 10px 12px;
-      box-shadow: 0 14px 40px rgba(2, 6, 23, 0.18);
-      z-index: 6;
-      display: none;
-    }
-
-    .face-tooltip .tt-name {
-      font-weight: 600;
-      color: #0b2540;
-      margin-bottom: 6px;
-    }
-
-    .face-tooltip .tt-price {
-      color: #b18b5e;
-      font-weight: 700;
-    }
-
-    /* caret */
-    .face-tooltip::before {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: #fff;
-      transform: rotate(45deg);
-      left: 14px;
-      top: -5px;
-      box-shadow: -2px -2px 6px rgba(2, 6, 23, 0.04);
-    }
-
-    /* Responsive */
-    @media (max-width: 992px) {
-      .face-map-btn {
-        font-size: 13px;
-        padding: 8px 12px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .face-map-btn {
-        display: inline-block;
-        margin: 6px 6px 6px 0;
-      }
-
-      .face-tooltip {
-        min-width: 140px;
-      }
-    }
-  </style>
-
-  <!-- Script (interactive behavior) -->
-
-  <!-- ================= STYLES ================= -->
-  <style>
-    /* Positioning: top 150px, right 24px */
-    .wechat-pill {
-      position: fixed;
-      top: 200px;
-      right: 24px;
-      z-index: 1600;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      height: 52px;
-      border-radius: 12px;
-      border: none;
-      background: #2dc100;
-      color: #fff;
-      font-weight: 700;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      cursor: pointer;
-      box-shadow: 0 14px 36px rgba(2, 6, 23, 0.18);
-      transform: translateY(-6px) scale(0.98);
-      transition: transform .22s ease, box-shadow .22s ease, opacity .22s ease;
-      -webkit-tap-highlight-color: transparent;
-      overflow: visible;
-    }
-
-    /* icon on left */
-    .wf-pill-icon {
-      width: 50px;
-      height: 50px;
-      display: block;
-      object-fit: contain;
-      filter: none;
-      /* keep original icon colors */
-    }
-
-    /* text */
-    .wf-pill-text {
-      font-size: 15px;
-      line-height: 1;
-      color: #fff;
-      white-space: nowrap;
-    }
-
-    /* hover lift */
-    .wechat-pill:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 48px rgba(2, 6, 23, 0.22);
-    }
-
-    /* entrance animation: slide in from right */
-    @keyframes wfSlideIn {
-      0% {
-        transform: translateX(18px) translateY(-6px) scale(.98);
-        opacity: 0;
-      }
-
-      60% {
-        transform: translateX(-6px) translateY(-8px) scale(1.02);
-        opacity: 1;
-      }
-
-      100% {
-        transform: translateX(0) translateY(-6px) scale(1);
-        opacity: 1;
-      }
-    }
-
-    /* idle floating (subtle) */
-    @keyframes wfFloat {
-      0% {
-        transform: translateY(-20px);
-      }
-
-      50% {
-        transform: translateY(-6px);
-      }
-
-      100% {
-        transform: translateY(-20px);
-      }
-    }
-
-    /* ring glow behind pill */
-    .wf-pill-ring {
-      position: absolute;
-      right: -6px;
-      top: -6px;
-      width: 72px;
-      height: 72px;
-      border-radius: 14px;
-      background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.06), rgba(7, 193, 128, 0.05) 40%, transparent 60%);
-      filter: blur(6px);
-      pointer-events: none;
-      opacity: 0.9;
-      transform: translateZ(0);
-    }
-
-    /* apply animations */
-    .wechat-pill {
-      animation: wfSlideIn .6s cubic-bezier(.2, .9, .3, 1) both, wfFloat 3.6s ease-in-out infinite;
-    }
-
-    /* Modal/backdrop/card - keep same modern styling but responsive */
-    .wechat-floating-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 1650;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .wechat-floating-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(3, 9, 18, 0.56);
-      backdrop-filter: blur(4px);
-      opacity: 0;
-      transition: opacity .28s ease;
-    }
-
-    .wechat-floating-card {
-      position: relative;
-      z-index: 1651;
-      background: #fff;
-      max-width: 420px;
-      width: 92%;
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 20px 60px rgba(3, 9, 18, 0.22);
-      transform: translateY(-8px) scale(.98);
-      opacity: 0;
-      transition: transform .28s cubic-bezier(.22, .9, .17, 1), opacity .28s ease;
-      text-align: center;
-    }
-
-    /* show state toggled by JS */
-    .wechat-floating-modal.show .wechat-floating-backdrop {
-      opacity: 1;
-    }
-
-    .wechat-floating-modal.show .wechat-floating-card {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-
-    /* close button */
-    .wechat-floating-close {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      border: none;
-      background: transparent;
-      font-size: 20px;
-      cursor: pointer;
-      color: #666;
-    }
-
-    /* card content */
-    .wechat-floating-body h4 {
-      margin: 6px 0 8px;
-      font-size: 20px;
-      color: #0b2540;
-    }
-
-    .wf-desc {
-      color: #58606a;
-      font-size: 14px;
-      margin: 0 0 14px;
-    }
-
-    .wf-qr-wrap {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 14px;
-    }
-
-    .wf-qr {
-      width: 180px;
-      height: 180px;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 10px 28px rgba(2, 6, 23, 0.08);
-    }
-
-    .wf-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-    }
-
-    .btn.wf-btn {
-      padding: 9px 12px;
-      border-radius: 8px;
-      background: #f1f5f9;
-      color: #0b2540;
-      border: 1px solid #e6eef8;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .btn.wf-btn-primary {
-      background: linear-gradient(180deg, #b18b5e, #9b7769);
-      color: #fff;
-      border: 0;
-      box-shadow: 0 10px 30px rgba(155, 119, 105, 0.16);
-    }
-
-    .wf-note {
-      font-size: 13px;
-      color: #6b7280;
-      margin: 8px 0 0;
-    }
-
-    /* responsive adjustments */
-    @media (max-width: 880px) {
-      .wechat-pill {
-        top: 180px;
-        right: 16px;
-        height: 48px;
-        padding: 10px 12px;
-        gap: 8px;
-      }
-
-      .wf-pill-icon {
-        width: 22px;
-        height: 22px;
-      }
-
-      .wf-pill-text {
-        font-size: 14px;
-      }
-
-      .wf-qr {
-        width: 150px;
-        height: 150px;
-      }
-
-      .wechat-floating-card {
-        padding: 14px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .wechat-pill {
-        top: 180px;
-        right: 12px;
-        width: auto;
-        height: 44px;
-        padding: 8px 10px;
-        border-radius: 10px;
-      }
-
-      .wf-pill-text {
-        display: none;
-      }
-
-      /* hide text on very small screens for space */
-    }
-  </style>
-
-  <style>
-    /* Ensure Google Translate is visible on all screens */
-    #google_translate_element {
-      display: block !important;
-      position: relative !important;
-      z-index: 9999 !important;
-      width: auto !important;
-      text-align: right;
-      padding-right: 10px;
-      padding-top: 10px;
-      padding-left: 10px;
-      background-color: white;
-    }
-
-    /* Force show the dropdown combo */
-    .goog-te-gadget {
-      height: auto !important;
-      overflow: visible !important;
-    }
-
-    .goog-te-gadget-simple {
-      background-color: transparent !important;
-      border: none !important;
-      font-size: 14px !important;
-      display: inline-flex !important;
-      align-items: center;
-      justify-content: center;
-      color: rgb(0, 0, 0) !important;
-      /* if your header is dark */
-    }
-
-    /* The select dropdown itself */
-    .goog-te-combo {
-      display: inline-block !important;
-      visibility: visible !important;
-      width: auto !important;
-      height: auto !important;
-      padding: 6px 8px !important;
-      font-size: 14px !important;
-      border-radius: 6px !important;
-      border: 1px solid rgba(0, 0, 0, 0.2) !important;
-      background: rgba(0, 0, 0, 0.1) !important;
-      color: #000000 !important;
-    }
-
-    /* Fix hidden iframe on mobile */
-    .goog-te-banner-frame.skiptranslate,
-    iframe.goog-te-menu-frame {
-      display: block !important;
-      visibility: visible !important;
-      height: auto !important;
-      opacity: 1 !important;
-    }
-
-    /* Override templates that hide translate */
-    body {
-      top: 0 !important;
-    }
-
-    .goog-te-banner-frame.skiptranslate {
-      display: none !important;
-    }
-
-    /* Make sure nothing hides the translate on small screens */
-    @media (max-width: 768px) {
-      #google_translate_element {
-        display: block !important;
-        z-index: 9999;
-      }
-
-      .goog-te-combo {
-        font-size: 13px !important;
-        padding: 5px 6px !important;
-        background: #ffffff !important;
-        color: #000 !important;
-      }
-    }
-  </style>
+<style>
+/* Gallery Styles */
+.gallery-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-scroll {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.gallery-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.before-after-box {
+  flex: 0 0 auto;
+  width: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform .3s ease;
+}
+
+.before-after-box:hover {
+  transform: scale(1.04);
+}
+
+.gallery-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgb(191, 105, 0);
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color .3s;
+  z-index: 10;
+  border: 2px solid #fff;
+}
+
+.gallery-btn:hover {
+  background-color: #b18b5e;
+}
+
+.gallery-prev {
+  left: 0px;
+}
+
+.gallery-next {
+  right: 0px;
+}
+
+/* Face Map Buttons */
+.face-map-btn {
+  display: inline-block;
+  margin: 8px 8px 0 0;
+  padding: 10px 14px;
+  border-radius: 24px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: all .16s ease;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
+}
+
+.face-map-btn:hover {
+  transform: translateY(-3px);
+}
+
+.face-map-btn.active {
+  background: #b18b5e;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 12px 28px rgba(11, 18, 28, 0.12);
+}
+
+.face-map-image-wrap {
+  position: relative;
+}
+
+.face-dot {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.96);
+  border: 2px solid rgba(155, 119, 105, 0.95);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  transition: transform .18s ease, box-shadow .18s ease;
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.08);
+}
+
+.face-dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(155, 119, 105, 0.95);
+  display: block;
+}
+
+.face-dot.active {
+  transform: translate(-50%, -50%) scale(1.25);
+  box-shadow: 0 16px 36px rgba(155, 119, 105, 0.18);
+}
+
+.face-tooltip {
+  position: absolute;
+  min-width: 160px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 14px 40px rgba(2, 6, 23, 0.18);
+  z-index: 6;
+  display: none;
+}
+
+.face-tooltip .tt-name {
+  font-weight: 600;
+  color: #0b2540;
+  margin-bottom: 6px;
+}
+
+.face-tooltip .tt-price {
+  color: #b18b5e;
+  font-weight: 700;
+}
+
+/* .face-tooltip::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  transform: rotate(45deg);
+  left: 14px;
+  top: -5px;
+  box-shadow: -2px -2px 6px rgba(2, 6, 23, 0.04);
+} */
+
+/* WeChat Pill */
+.wechat-pill {
+  position: fixed;
+  top: 200px;
+  right: 24px;
+  z-index: 1600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  height: 52px;
+  border-radius: 12px;
+  border: none;
+  background: #2dc100;
+  color: #fff;
+  font-weight: 700;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  cursor: pointer;
+  box-shadow: 0 14px 36px rgba(2, 6, 23, 0.18);
+  transform: translateY(-6px) scale(0.98);
+  transition: transform .22s ease, box-shadow .22s ease, opacity .22s ease;
+  -webkit-tap-highlight-color: transparent;
+  overflow: visible;
+  animation: wfSlideIn .6s cubic-bezier(.2, .9, .3, 1) both, wfFloat 3.6s ease-in-out infinite;
+}
+
+.wf-pill-icon {
+  width: 50px;
+  height: 50px;
+  display: block;
+  object-fit: contain;
+}
+
+.wf-pill-text {
+  font-size: 15px;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.wechat-pill:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 48px rgba(2, 6, 23, 0.22);
+}
+
+@keyframes wfSlideIn {
+  0% { transform: translateX(18px) translateY(-6px) scale(.98); opacity: 0; }
+  60% { transform: translateX(-6px) translateY(-8px) scale(1.02); opacity: 1; }
+  100% { transform: translateX(0) translateY(-6px) scale(1); opacity: 1; }
+}
+
+@keyframes wfFloat {
+  0% { transform: translateY(-20px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(-20px); }
+}
+
+.wf-pill-ring {
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.06), rgba(7, 193, 128, 0.05) 40%, transparent 60%);
+  filter: blur(6px);
+  pointer-events: none;
+  opacity: 0.9;
+  transform: translateZ(0);
+}
+
+.wechat-floating-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1650;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wechat-floating-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 9, 18, 0.56);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity .28s ease;
+}
+
+.wechat-floating-card {
+  position: relative;
+  z-index: 1651;
+  background: #fff;
+  max-width: 420px;
+  width: 92%;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 20px 60px rgba(3, 9, 18, 0.22);
+  transform: translateY(-8px) scale(.98);
+  opacity: 0;
+  transition: transform .28s cubic-bezier(.22, .9, .17, 1), opacity .28s ease;
+  text-align: center;
+}
+
+.wechat-floating-modal.show .wechat-floating-backdrop {
+  opacity: 1;
+}
+
+.wechat-floating-modal.show .wechat-floating-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.wechat-floating-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
+
+.wechat-floating-body h4 {
+  margin: 6px 0 8px;
+  font-size: 20px;
+  color: #0b2540;
+}
+
+.wf-desc {
+  color: #58606a;
+  font-size: 14px;
+  margin: 0 0 14px;
+}
+
+.wf-qr-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.wf-qr {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(2, 6, 23, 0.08);
+}
+
+.wf-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.btn.wf-btn {
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #0b2540;
+  border: 1px solid #e6eef8;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn.wf-btn-primary {
+  background: linear-gradient(180deg, #b18b5e, #9b7769);
+  color: #fff;
+  border: 0;
+  box-shadow: 0 10px 30px rgba(155, 119, 105, 0.16);
+}
+
+.wf-note {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 8px 0 0;
+}
+
+/* Google Translate */
+#google_translate_element {
+  display: block !important;
+  position: relative !important;
+  z-index: 9999 !important;
+  width: auto !important;
+  text-align: right;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: white;
+}
+
+.goog-te-gadget {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.goog-te-gadget-simple {
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 14px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0) !important;
+}
+
+.goog-te-combo {
+  display: inline-block !important;
+  visibility: visible !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 6px 8px !important;
+  font-size: 14px !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #000000 !important;
+}
+
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-menu-frame {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+  opacity: 1 !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .face-map-btn {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 880px) {
+  .wechat-pill {
+    top: 180px;
+    right: 16px;
+    height: 48px;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .wf-pill-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .wf-pill-text {
+    font-size: 14px;
+  }
+
+  .wf-qr {
+    width: 150px;
+    height: 150px;
+  }
+
+  .wechat-floating-card {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .before-after-box {
+    width: 220px;
+  }
+
+  .gallery-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
+  }
+
+  .face-map-btn {
+    display: inline-block;
+    margin: 6px 6px 6px 0;
+  }
+
+  .face-tooltip {
+    min-width: 140px;
+  }
+
+  #google_translate_element {
+    display: block !important;
+    z-index: 9999;
+  }
+
+  .goog-te-combo {
+    font-size: 13px !important;
+    padding: 5px 6px !important;
+    background: #ffffff !important;
+    color: #000 !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .wechat-pill {
+    top: 180px;
+    right: 12px;
+    width: auto;
+    height: 44px;
+    padding: 8px 10px;
+    border-radius: 10px;
+  }
+
+  .wf-pill-text {
+    display: none;
+  }
+}
+</style>
 
 </head>
 
@@ -1540,7 +1476,7 @@
         <div class="row align-items-center copyright-wrap">
           <div class="col-lg-6">
             <div class="copy-text">
-              Copyright &copy; 2025 <a href="#">One Zone Health & Cosmetic Clinic</a>. All rights reserved.
+              Copyright &copy;<a href="#">One Zone Health & Cosmetic Clinic</a>. All rights reserved.
             </div>
           </div>
 
